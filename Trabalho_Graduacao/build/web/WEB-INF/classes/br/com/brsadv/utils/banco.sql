@@ -32,11 +32,14 @@ insert into enderecos(estado, cidade, rua, numero)values(1,1,'Minas Gerais',1103
 
 create table advogados(
 	idadv serial primary key,
-	nomeadv varchar(100) not null,
-	areaadv integer references areas(idarea),
+	nome varchar(100) not null,
+	area integer references areas(idarea),
 	oab varchar (8) not null,
 	endereco integer references enderecos(idendereco),
-	sobre varchar(200)
+	sobre varchar(200),
+	insta varchar(150),
+	linkedin varchar(150),
+	facebook varchar(150)
 );
-insert into advogados(nomeadv,areaadv,oab,endereco,sobre)
-values('Raul Bastos',1,'SP999666',1,'Advogado Civil que adora receber PIX !');
+insert into advogados(nome,area,oab,endereco,sobre,insta,linkedin,facebook)
+values('Raul Bastos',1,'SP999666',1,'Advogado Civil que adora receber PIX !','link 1','link 2', 'link 3');

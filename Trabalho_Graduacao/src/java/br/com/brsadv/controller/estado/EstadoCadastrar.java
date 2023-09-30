@@ -30,14 +30,11 @@ public class EstadoCadastrar extends HttpServlet {
         oEstado.setSiglaEstado(siglaEstado);
         try {
             GenericDAO dao = new EstadoDAO();
-            if (dao.cadastrar(oEstado)){
-                mensagem = "Estado cadastado com Sucesso!";
+            if (dao.cadastrar(oEstado)) {
+                response.getWriter().write("1");
+            } else {
+                response.getWriter().write("0");
             }
-            else{
-                mensagem = "Problemas ao cadastar Estado. Verifique os dados informados e tente novamente";
-            }
-            request.setAttribute("mensagem", mensagem);
-            response.sendRedirect("EstadoListar");
         }catch (Exception ex){
             System.out.println("Problemas no Servlet ao cadastrar Estado! Erro: "+ex.getMessage());
             

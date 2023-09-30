@@ -21,12 +21,12 @@
                             <center>
 
                                 <img alt="imagem" class="img-thumbnail"
-                                     src="${despesa.imagemDocumento}"
+                                     src="${adv.imagemadv}"
                                      name="target" id="target" width="170" height="200">
                                 <br/>
                                 <input type="file" id="gallery-photo-add"
-                                       class="inputfile" onchange="uploadFile();"/>
-                                <label for="gallery-photo-add" class="btn btn-success">
+                                       class="inputfile" onchange="uploadFile();"/><br/>
+                                <label for="gallery-photo-add" class="bt-amarelo-down">
                                     <i class="fas fa-file-upload"></i>
                                     Selecionar Foto                                
                                 </label>
@@ -42,59 +42,88 @@
 
                         <div class="form-group">
 
-                            <input class="form-control" type="hidden" value="${despesa.idDespesa}" name="iddespesa" id="iddespesa" readonly="readonly"/>                     
+                            <input class="form-control" type="hidden" value="${adv.idadv}" name="idadv" id="idadv" readonly="readonly"/>                     
 
                         </div>
-
-                        <div class="form-group">
-
-                            <label>Nome</label>
-                            <input class="form-control" type="text" value="${despesa.descricao}" name="descricao" id="descricao" size="100" maxlength="100"/>
-
-                        </div>
-
                         <div class="form-group">
                             <div class="form-line row">
 
                                 <div class="col-sm">
-
-                                    <label>Data da Despesa</label>
-                                    <input class="form-control" type="date" name="datadocumento" id="datadocumento" value="${despesa.dataDocumento}"/>
-
-
-                                </div>
-
-                                <div class="col-sm">
-                                    <label>Valor da Despesa</label>
+                                    <label>Nome</label>
                                     <input class="form-control" type="text" style="text-align: rigth;"
-                                           name="valordespesa" id="valordespesa" 
-                                           value="<fmt:formatNumber value='${despesa.valorDespesa}' type='currency'/>"/>
+                                           name="nome" id="nome" 
+                                           value="${adv.nome}"/>
                                 </div>
 
                                 <div class="col-sm">
-                                    <label>Valor Pago</label>
-                                    <input class="form-control" type="text" style="text-align: rigth;"
-                                           name="valorpago" id="valorpago" 
-                                           value="<fmt:formatNumber value='${despesa.valorPago}' type='currency'/>"/>
+
+                                    <label>OAB</label>
+                                    <input class="form-control" type="text" name="oab" id="oab" value="${adv.oab}"/>
+
                                 </div>
 
+                                <!--                                <div class="col-sm">
+                                                                    <label>Valor Pago</label>
+                                                                    <input class="form-control" type="text" style="text-align: rigth;"
+                                                                           name="valorpago" id="valorpago" 
+                                                                           value="<fmt:formatNumber value='${despesa.valorPago}' type='currency'/>"/>
+                                                                </div>-->
+
+                                <!--                                                                <div class="col-sm">
+                                                                                                    <label>Selecionar area principal</label>
+                                                                                                    <select name="area" id="area">
+                                                                                                        <option value="">Selecione</option>
+                                <c:forEach var="endereco" items="${endereco}">
+                                    <option value="${endereco.idendereco}" 
+                                    ${adv.endereco.idendereco == endereco.idendereco ? "selected" : ""}>
+                                    ${endereco.cidade}${endereco.rua}${endereco.numero}
+                                </option>
+                                </c:forEach>
+                            </select>
+                        </div>-->
                                 <div class="col-sm">
-                                    <label>Selecionar endereço</label>
-                                    <select name="idendereco" id="idendereco">
-                                        <option value="">Selecione</option>
-                                        <c:forEach var="endereco" items="${endereco}">
-                                            <option value="${endereco.idendereco}" 
-                                                    ${adv.endereco.idendereco == endereco.idendereco ? "selected" : ""}>
-                                                ${endereco.cidade}${endereco.rua}${endereco.numero}
-                                            </option>
-                                        </c:forEach>
-                                    </select>
+                                    <div class="form-group">
+                                        <label>Area</label>
+                                        <select name="area" id="area" class="form-control">
+                                            <option value="">Selecione</option>
+                                            <c:forEach var="area" items="${area}">
+                                                <option value="${area.idarea}" 
+                                                        ${adv.area.idarea == area.idarea ? "selected" : ""}>
+                                                    ${area.nomearea}
+                                                </option>
+                                            </c:forEach>
+                                        </select>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-
                         <div class="form-group">
-                            <button class="btn btn-success" type="submit" id="submit" onclick="validarCampos()">Salvar Documento</button>
+
+                            <label>Sobre</label>
+                            <input class="form-control" type="text" value="${adv.sobre}" name="sobre" id="sobre" size="100" maxlength="100"/>
+
+                        </div>
+                        <div class="form-line row">
+                            <div class="col-sm">
+                                <label> <i class="bi bi-instagram"></i> Instagram</label>
+                                <input class="form-control" type="text" style="text-align: rigth;"
+                                       name="insta" id="insta" 
+                                       value="${adv.insta}"/>
+                            </div><div class="col-sm">
+                                <label><i class="bi bi-facebook"></i> Facebook</label>
+                                <input class="form-control" type="text" style="text-align: rigth;"
+                                       name="facebook" id="facebook" 
+                                       value="${adv.facebook}"/>
+                            </div><div class="col-sm">
+                                <label><i class="bi bi-linkedin"></i> Linkedin</label>
+                                <input class="form-control" type="text" style="text-align: rigth;"
+                                       name="linkedin" id="linkedin" 
+                                       value="${adv.linkedin}"/>
+                            </div>
+                        </div>
+                        <br/>
+                        <div class="form-group" align="center">
+                            <button class="bt-amarelo-down" type="submit" id="submit" onclick="validarCampos()">Salvar Documento</button>
                         </div> 
 
                     </div>                 
@@ -167,25 +196,34 @@
 
     function validarCampos() {
         console.log("Entrei na validação de campos");
-        if (document.getElementById("descricao").value == '') {
+        if (document.getElementById("nome").value == '') {
             Swal.fire({
                 position: 'center',
                 icon: 'error',
-                title: 'Verifique a descrição da despesa !',
+                title: 'Verifique o nome !',
                 showCopnfirmButton: false,
                 timer: 1000
             });
-            $("#descricao").focus();
-        } else if (document.getElementById("datadocumento").value == '') {
+            $("#nome").focus();
+        } else if (document.getElementById("oab").value == '') {
             Swal.fire({
                 position: 'center',
                 icon: 'error',
-                title: 'Verifique a Data da Despesa!',
+                title: 'Verifique a OAB !',
                 showConfirmButton: false,
                 timer: 1000
             });
-            $("#valordespesa").focus();
-        } else {
+            $("#oab").focus();
+        } else if (document.getElementById("area").value == '') {
+            Swal.fire({
+                position: 'center',
+                icon: 'error',
+                title: 'Verifique a area !',
+                showConfirmButton: false,
+                timer: 1000
+            });
+            $("#area").focus();
+        }else {
             gravarDados();
         }
 
@@ -196,14 +234,17 @@
         var target = document.getElementById("target").src;
         $.ajax({
             type: 'post',
-            url: 'DespesaCadastrar',
+            url: 'AdvCadastrar',
             data: {
-                iddespesa: $('#iddespesa').val(),
-                descricao: $('#descricao').val(),
-                datadocumento: $('#datadocumento').val(),
-                valordespesa: $('#valordespesa').val(),
-                valorpago: $('#valorpago').val(),
-                imagemdocumento: target
+                idadv: $('#idadv').val(),
+                nome: $('#nome').val(),
+                oab: $('#oab').val(),
+                area: $('#area').val(),
+                sobre: $('#sobre').val(),
+                insta: $('#insta').val(),
+                facebook: $('#facebook').val(),
+                linkedin: $('#linkedin').val(),
+                imagemadv: target
             },
             success: function (data) {
                 console.log("Resposta servlet->");
@@ -213,7 +254,7 @@
                         position: 'center',
                         icon: 'success',
                         title: 'Sucesso',
-                        text: 'Despesa gravada com sucesso!',
+                        text: 'Advogado gravado com sucesso!',
                         showConfirmButton: false,
                         timer: 5000
                     })
@@ -222,15 +263,15 @@
                         position: 'center',
                         icon: 'error',
                         title: 'Erro',
-                        text: 'Não foi possivel gravar a despesa!',
+                        text: 'Não foi possivel gravar Advogado!',
                         showConfirmButton: false,
                         timer: 5000
                     })
                 }
-                window.location.href = "${pageContext.request.contextPath}/DespesaListar";
+                window.location.href = "${pageContext.request.contextPath}/AdvListar";
             },
             error: function (data) {
-                window.location.href = "${pageContext.request.contextPath}/DespesaListar";
+                window.location.href = "${pageContext.request.contextPath}/AdvListar";
             }
         });
     }

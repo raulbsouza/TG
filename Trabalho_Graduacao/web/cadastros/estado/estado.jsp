@@ -1,67 +1,103 @@
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-<jsp:include page="/header.jsp"/>
 
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt"%>
+<%@page contentType="text/html" pageEncoding="iso-8859-1"%>
+<jsp:include page="/header.jsp"/>
 <div class="tabelas">
-    <div class="card_table"><h2>Estados</h2>
-    <div>
-        <table id="datatable" class="">
-            <thead>
-                <tr>
-                    <th align="left">ID</th>
-                    <th align="left">Nome</th>
-                    <th align="left">Sigla</th>
-                    <th align="rigth"></th>
-                    <th align="rigth"></th>
-                </tr>
-            </thead>
-            <tbody>
-                <c:forEach var="estado" items="${estados}">
+    <div class="card_table">
+        <h2>Estados</h2>
+        <div class="tabela-listar">
+            <table class="largura100">
+                <thead >                        
                     <tr>
-                        <td align="left">${estado.idEstado}</td>
-                        <td align="left">${estado.nomeEstado}</td>
-                        <td align="left">${estado.siglaEstado}</td>
-                        <td align="center">
-                            <a class="btn btn-danger" href="${pageContext.request.contextPath}/EstadoExcluir?idEstado=${estado.idEstado}">Excluir</a>
-                        </td>
-                        <td align="center">
-                            <a  class="btn btn-success" href="${pageContext.request.contextPath}/EstadoCarregar?idEstado=${estado.idEstado}">Alterar</a>
-                        </td>
+                        <th align="left">ID</th>
+                        <th align="left">Nome</th>
+                        <th align="left">Sigla</th>
+                        <th align="rigth"></th>
+                        <th align="rigth"></th>
                     </tr>
-                </c:forEach>
-            </tbody>
-        </table>
-    </div>
-    <div align="center">
-        <a class="btn btn-success" href="${pageContext.request.contextPath}/EstadoNovo">Novo</a>
-        <a class="btn btn-secondary" href="index.jsp">Voltar Ã  PÃ¡ginca Inicial</a>
-    </div>
+                </thead>                                 
+                <tbody >
+                    <c:forEach var="estado" items="${estados}">                    
+                        <tr class="borda-top">
+                            <td align="left">${estado.idEstado}</td>
+                            <td align="left">${estado.nomeEstado}</td>
+                            <td align="left">${estado.siglaEstado}</td>
+                            <td align="center" >
+                                  <a href="#" id="deletar" title="Excluir" onclick="deletar(${estado.idEstado})">
+                                    <button class="bt-amarelo">Excluir</button>
+                                </a>
+                            </td>
+                            <td align="center" >
+                                <a href="${pageContext.request.contextPath}/EstadoCarregar?idEstado=${estado.idEstado}">
+                                    <button class=" bt-amarelo"/>Alterar</button>
+                                </a>
+                            </td>
+                        </tr>                
+                    </c:forEach>
+                </tbody>
+
+            </table>
+        </div>
+        <div align="center" class="col">        
+            <a href="${pageContext.request.contextPath}/EstadoNovo">
+                <button class="align-button bt-amarelo-down">Novo</button>
+            </a>
+            <a href="index.jsp" >
+                <button class="align-buttopn bt-amarelo-down">Voltar à Página Inicial</button>
+            </a>
+        </div>        
     </div>
 </div>
 <script>
-    $(document).ready(function () {
-        console.log('entrei ready');
-        $('#datatable').DataTable({
-            "oLanguage": {
-                "sProcessing": "Processando...",
-                "sLengthMenu": "Mostrar _MENU_ registros",
-                "sZeroRecords": "Nenhum registro encontrado.",
-                "sInfo": "Mostrando de _START_ atÃ© _END_ de _TOTAL_ registros",
-                "sInfoEmpty": "Mostrando de 0 atÃ© 0 de 0 registros",
-                "sInfoFiltered": "",
-                "sInfoPostFix": "",
-                "sSearch": "Buscar:",
-                "sUrl": "",
-                "oPaginate": {
-                    "sFirst": "Primeiro",
-                    "sPrevious": "Anterior",
-                    "sNext": "Seguinte",
-                    "sLast": "Ultimo"
-                }
+    function deletar(codigo) {
+        var id = codigo;
+        console.log(codigo);
+        Swal.fire({
+            title: 'Você tem certeza?',
+            text: "Você não poderá recuperar depois!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Excluir Estado',
+            cancelButtonText: 'Cancelar'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    type: 'post',
+                    url: '${pageContext.request.contextPath}/EstadoExcluir',
+                    data: {
+                        idEstado: id
+                    },
+                    success:
+                            function (data) {
+                                if (data == 1) {
+                                    Swal.fire({
+                                        position: 'top-center',
+                                        icon: 'success',
+                                        title: 'Sucesso',
+                                        text: 'Estado excluido com sucesso!',
+                                        showConfirmButton: false,
+                                        timer: 2000
+                                    })
+                                } else {
+                                    Swal.fire({
+                                        position: 'top-center',
+                                        icon: 'error',
+                                        title: 'ERRO',
+                                        text: 'Não foi possivel excluir o estado',
+                                        showConfimButton: false,
+                                        timer: 2000
+                                    })
+                                }
+                                setTimeout(function() {window.location.href = "${pageContext.request.contextPath}/EstadoListar";}, 1500);
+                            }
+                });
             }
+            ;
         });
-    });
+    }
 </script>
 
-<%@ include file="/footer-neutro.jsp" %>
+<%@ include file="/footer-neutro.jsp" %>        

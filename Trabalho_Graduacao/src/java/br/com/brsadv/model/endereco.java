@@ -2,11 +2,11 @@
 package br.com.brsadv.model;
 
 public class Endereco {
-    int idendereco;
-    Estado estado;
-    Cidade cidade;
-    String rua;
-    int numero;
+    private int idendereco;
+    private Estado estado;
+    private Cidade cidade;
+    private String rua;
+    private int numero;
 
     public Endereco() {
         this.idendereco = 0;

@@ -7,7 +7,7 @@
         <title>BRSADV</title>
         <meta content="" name="description">
         <meta content="" name="keywords">
-        <link href="img/logo_3.png" rel="icon">
+        <link href="${pageContext.request.contextPath}/img/logo_3.png" rel="icon">
         <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
 
         <!-- Vendor CSS Files -->
@@ -53,7 +53,7 @@
                         <li><a class="nav-link scrollto" href="#about">Sobre</a></li>
                         <li><a class="nav-link scrollto" href="#services">Serviços</a></li>
                         <li><a class="nav-link scrollto " href="#portfolio">Faça sua Pergunta</a></li>
-                        <li><a class="nav-link scrollto" href="#team">Equipe</a></li>
+                        <li><a class="nav-link scrollto" href="${pageContext.request.contextPath}/AdvListarUser">Equipe</a></li>
                         <li class="dropdown"><a href="#"><span>Área do Direito</span> <i class="bi bi-chevron-down"></i></a>
                             <ul>
                                 <li><a href="#">Civil</a></li>
@@ -67,16 +67,30 @@
                         <li><a class="nav-link scrollto" href="#contact">Contato</a></li>
                         <li class="dropdown"><a href="#"><span>ADM</span> <i class="bi bi-chevron-down"></i></a>
                             <ul>
-                                <li><a href="${pageContext.request.contextPath}/cadastros/adv/cadastrarADV.jsp">Cadastrar ADV</a></li>
+                                <li class="dropdown"><a href="#"><span>ADV's</span> <i class="bi bi-chevron-down"></i></a>
+                                    <ul>
+                                        <li><a href="${pageContext.request.contextPath}/AdvListar">Listar Advogados</a></li>
+                                        <li><a href="${pageContext.request.contextPath}/AdvNovo">Cadastrar Advogado</a></li>
+                                    </ul>
                                 <li class="dropdown"><a href="#"><span>Estados</span> <i class="bi bi-chevron-down"></i></a>
                                     <ul>
-                                        <li><a href="${pageContext.request.contextPath}/cadastros/estado/estado.jsp">Listar Estados</a></li>
-                                        <li><a href="${pageContext.request.contextPath}/cadastros/estado/estadoCadastrar.jsp">Cadastrar Estado</a></li>
+                                        <li><a href="${pageContext.request.contextPath}/EstadoListar">Listar Estados</a></li>
+                                        <li><a href="${pageContext.request.contextPath}/EstadoNovo">Cadastrar Estado</a></li>
                                     </ul>
                                 <li class="dropdown"><a href="#"><span>Cidades</span> <i class="bi bi-chevron-down"></i></a>
                                     <ul>
-                                        <li><a href="${pageContext.request.contextPath}/cadastros/cidade/cidade.jsp">Listar Cidades</a></li>
-                                        <li><a href="${pageContext.request.contextPath}/cadastros/cidade/cidadeCadastrar.jsp">Cadastrar Cidade</a></li>
+                                        <li><a href="${pageContext.request.contextPath}/CidadeListar">Listar Cidades</a></li>
+                                        <li><a href="${pageContext.request.contextPath}/CidadeNovo">Cadastrar Cidade</a></li>
+                                    </ul>
+                                <li class="dropdown"><a href="#"><span>Endereços</span> <i class="bi bi-chevron-down"></i></a>
+                                    <ul>
+                                        <li><a href="${pageContext.request.contextPath}/EnderecoListar">Listar Endereço</a></li>
+                                        <li><a href="${pageContext.request.contextPath}/EnderecoNovo">Cadastrar Endereço</a></li>
+                                    </ul>
+                                <li class="dropdown"><a href="#"><span>Areas</span> <i class="bi bi-chevron-down"></i></a>
+                                    <ul>
+                                        <li><a href="${pageContext.request.contextPath}/AreaListar">Listar Areas</a></li>
+                                        <li><a href="${pageContext.request.contextPath}/AreaNovo">Cadastrar Area</a></li>
                                     </ul>
                             </ul>
                         </li>

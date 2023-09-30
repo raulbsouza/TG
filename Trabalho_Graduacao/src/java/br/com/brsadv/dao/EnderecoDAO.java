@@ -40,20 +40,21 @@ public class EnderecoDAO implements GenericDAO{
 
     @Override
     public Boolean inserir(Object objeto) {
-        Cidade oCidade = (Cidade) objeto;
+        Endereco oEndereco = (Endereco) objeto;
         PreparedStatement stmt = null;
-        String sql = "insert into cidade(nomecidade,idestado,cep) values (?,?,?)";
+        String sql = "insert into enderecos(estado,cidade,rua,numero) values (?,?,?,?)";
         try {
             stmt = conexao.prepareStatement(sql);
-            stmt.setString(1, oCidade.getNomeCidade());
-            stmt.setInt(2, oCidade.getEstado().getIdEstado());
-            stmt.setInt(3, oCidade.getCep());
+            stmt.setInt(1, oEndereco.getEstado().getIdEstado());
+            stmt.setInt(2, oEndereco.getCidade().getIdCidade());
+            stmt.setString(3, oEndereco.getRua());
+            stmt.setInt(4, oEndereco.getNumero());
             stmt.execute();
             conexao.commit();
             return true;
         } catch (Exception ex) {
             try {
-                System.out.println("Problemas ao cadastrar a Cidade Erro: " + ex.getMessage());
+                System.out.println("Problemas ao cadastrar a Endereço Erro: " + ex.getMessage());
                 ex.printStackTrace();
                 conexao.rollback();
             } catch (SQLException e) {
@@ -66,20 +67,22 @@ public class EnderecoDAO implements GenericDAO{
 
     @Override
     public Boolean alterar(Object objeto) {
-        Cidade oCidade = (Cidade) objeto;
+        Endereco oEndereco = (Endereco) objeto;
         PreparedStatement stmt = null;
-        String sql = "update cidade set nomecidade = ?,idestado=?,cep=? where idcidade=?";
+        String sql = "update enderecos set estado = ?,cidade=?,rua=?, numero=? where idendereco=?";
         try {
             stmt = conexao.prepareStatement(sql);
-            stmt.setString(1, oCidade.getNomeCidade());
-            stmt.setInt(2, oCidade.getEstado().getIdEstado());
-            stmt.setInt(3, oCidade.getCep());
-            stmt.setInt(4, oCidade.getIdCidade());
+            stmt.setInt(1, oEndereco.getEstado().getIdEstado());
+            stmt.setInt(2, oEndereco.getCidade().getIdCidade());
+            stmt.setString(3, oEndereco.getRua());
+            stmt.setInt(4, oEndereco.getNumero());
+            stmt.setInt(5, oEndereco.getIdendereco());
+            stmt.execute();
             conexao.commit();
             return true;
         } catch (Exception ex) {
             try {
-                System.out.println("Problemas ao alterar a Cidade Erro: " + ex.getMessage());
+                System.out.println("Problemas ao alterar a Endereço Erro: " + ex.getMessage());
                 ex.printStackTrace();
                 conexao.rollback();
             } catch (SQLException e) {
@@ -92,17 +95,17 @@ public class EnderecoDAO implements GenericDAO{
 
     @Override
     public Boolean excluir(int numero) {
-        int idCidade = numero;
+        int idEndereco = numero;
         PreparedStatement stmt = null;
-         String sql = "delete from estado where idcidade=?";
+         String sql = "delete from enderecos where idendereco=?";
         try {
             stmt = conexao.prepareStatement(sql);
-            stmt.setInt(1, idCidade);
+            stmt.setInt(1, idEndereco);
             stmt.execute();
             conexao.commit();
             return true;
         } catch (Exception ex) {
-            System.out.println("Problemas ao excluir a Cidade! Erro: " + ex.getMessage());
+            System.out.println("Problemas ao excluir a Endereço! Erro: " + ex.getMessage());
             try {
                 conexao.rollback();
             } catch (SQLException e) {
@@ -115,27 +118,30 @@ public class EnderecoDAO implements GenericDAO{
 
     @Override
     public Object carregar(int numero) {
-        int idCidade = numero;
+        int idEndereco = numero;
         PreparedStatement stmt = null;
         ResultSet rs = null;
-        Cidade oCidade = null;
-        String sql = "select * from cidade where idcidade=?";
+        Endereco oEndereco = null;
+        String sql = "select * from enderecos where idendereco=?";
         try{
             stmt = conexao.prepareStatement(sql);
-            stmt.setInt(1, idCidade);
+            stmt.setInt(1, idEndereco);
             rs=stmt.executeQuery();
             while (rs.next()){
-                oCidade = new Cidade();
-                oCidade.setIdCidade(rs.getInt("idCidade"));
-                oCidade.setNomeCidade(rs.getString("nomecidade"));
-                oCidade.setCep(rs.getInt("cep"));
+                oEndereco = new Endereco();
+                oEndereco.setIdendereco(rs.getInt("idendereco"));
+                oEndereco.setRua(rs.getString("rua"));
+                oEndereco.setNumero(rs.getInt("numero"));
                 
                 EstadoDAO oEstadoDAO = new EstadoDAO();
-                oCidade.setEstado((Estado) oEstadoDAO.carregar(rs.getInt("idestado")));
+                oEndereco.setEstado((Estado) oEstadoDAO.carregar(rs.getInt("estado")));
+                
+                CidadeDAO oCidadeDAO = new CidadeDAO();
+                oEndereco.setCidade((Cidade) oCidadeDAO.carregar(rs.getInt("cidade")));
             }
-            return oCidade;
+            return oEndereco;
         }catch (Exception ex){
-            System.out.println("Problemas ao carregar Cidade! Erro: "+ex.getMessage());
+            System.out.println("Problemas ao carregar Endereço! Erro: "+ex.getMessage());
             return false;
         }
     }
@@ -145,15 +151,15 @@ public class EnderecoDAO implements GenericDAO{
         List<Object> resultado = new ArrayList<>();
         PreparedStatement stmt = null;
         ResultSet rs = null;
-        String sql = "Select*from cidade order by nomecidade";
+        String sql = "Select*from enderecos order by estado";
         try{
             stmt = conexao.prepareStatement(sql);
             rs=stmt.executeQuery();
             while(rs.next()){
-                Cidade oCidade = new Cidade();
-                oCidade.setIdCidade(rs.getInt("idCidade"));
-                oCidade.setNomeCidade(rs.getString("nomecidade"));
-                oCidade.setCep(rs.getInt("cep"));
+                Endereco oEndereco = new Endereco();
+                oEndereco.setIdendereco(rs.getInt("idendereco"));
+                oEndereco.setRua(rs.getString("rua"));
+                oEndereco.setNumero(rs.getInt("numero"));
                 
                 EstadoDAO oEstadoDAO = null;
                 try{
@@ -162,11 +168,22 @@ public class EnderecoDAO implements GenericDAO{
                     System.out.println("Erro buscar estado "+ex.getMessage());
                     ex.printStackTrace();
                 }
-                oCidade.setEstado((Estado) oEstadoDAO.carregar(rs.getInt("idestado")));
-                resultado.add(oCidade);
+                oEndereco.setEstado((Estado) oEstadoDAO.carregar(rs.getInt("estado")));
+                
+                CidadeDAO oCidadeDAO = null;
+                try{
+                    oCidadeDAO = new CidadeDAO();
+                } catch(Exception ex){
+                    System.out.println("Erro buscar cidade "+ex.getMessage());
+                    ex.printStackTrace();
+                }
+                oEndereco.setCidade((Cidade) oCidadeDAO.carregar(rs.getInt("cidade")));
+                
+                
+                resultado.add(oEndereco);
             }
         }catch (SQLException ex){
-            System.out.println("Problemas ao listar Cidade! Erro: "+ex.getMessage());
+            System.out.println("Problemas ao listar Endereço! Erro: "+ex.getMessage());
         }
         return resultado;
     }

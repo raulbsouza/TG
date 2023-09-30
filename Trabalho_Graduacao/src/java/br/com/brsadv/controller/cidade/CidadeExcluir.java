@@ -19,13 +19,11 @@ public class CidadeExcluir extends HttpServlet {
         String mensagem = null;
         try {
             GenericDAO dao = new CidadeDAO();
-            if (dao.excluir(idCidade)) {
-                mensagem = "Cidade excluido com Sucesso!";
-            } else {
-                mensagem = "Problemas ao excluir Cidade";
-            }
-            request.setAttribute("mensagem", mensagem);            
-            response.sendRedirect("CidadeListar");
+            if(dao.excluir(idCidade)){
+               response.getWriter().write("1");
+           }else{
+               response.getWriter().write("0");
+           }
         } catch (Exception ex) {
             System.out.println("Problemas no Servelet ao excluir Cidade! Erro: "+ ex.getMessage());
             ex.printStackTrace();

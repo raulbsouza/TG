@@ -8,7 +8,7 @@ public class SingleConnection {
     private static Connection conexao = null;
     private static String servidor = "jdbc:postgresql://localhost:5432/bdtg?autoReconnect=true";
     private static String usuario = "postgres";
-    private static String senha = "123456";
+    private static String senha = "13951";
     static{
         try {
             conectar();

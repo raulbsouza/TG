@@ -15,18 +15,16 @@ public class EstadoExcluir extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8859-1");
+        response.setContentType("text/html;charset=iso-8859-1");
         int idEstado = Integer.parseInt(request.getParameter("idEstado"));
         String mensagem = null;
         try {
             GenericDAO dao = new EstadoDAO();
-            if (dao.excluir(idEstado)) {
-                mensagem = "Estado excluido com sucesso !";
-            } else {
-                mensagem = "Problemas ao excluir Estado";
-            }
-            request.setAttribute("mensagem", mensagem);
-            response.sendRedirect("EstadoListar");
+            if(dao.excluir(idEstado)){
+               response.getWriter().write("1");
+           }else{
+               response.getWriter().write("0");
+           }
         } catch (Exception ex) {
             System.out.println("Problemas no Servlet ao excluir Estado! Erro: " + ex.getMessage());
             ex.printStackTrace();

@@ -6,7 +6,7 @@
 <main id="main">
 
     <!-- ======= About Section ======= -->
-    <section id="about" class="about">
+<!--    <section id="about" class="about">
       <div class="container" data-aos="fade-up">
 
         <div class="row">
@@ -82,9 +82,9 @@
         </div>
 
       </div>
-    </section><!-- End Features Section -->
+    </section> End Features Section 
 
-    <!-- ======= Services Section ======= -->
+     ======= Services Section ======= 
     <section id="services" class="services">
       <div class="container" data-aos="fade-up">
 
@@ -145,9 +145,9 @@
         </div>
 
       </div>
-    </section><!-- End Services Section -->
+    </section> End Services Section 
 
-    <!-- ======= Cta Section ======= -->
+     ======= Cta Section ======= 
     <section id="cta" class="cta">
       <div class="container" data-aos="zoom-in">
 
@@ -158,9 +158,9 @@
         </div>
 
       </div>
-    </section><!-- End Cta Section -->
+    </section> End Cta Section 
 
-    <!-- ======= Portfolio Section ======= -->
+     ======= Portfolio Section ======= 
     <section id="portfolio" class="portfolio">
       <div class="container" data-aos="fade-up">
 
@@ -311,9 +311,9 @@
         </div>
 
       </div>
-    </section><!-- End Portfolio Section -->
+    </section> End Portfolio Section 
 
-    <!-- ======= Counts Section ======= -->
+     ======= Counts Section ======= 
     <section id="counts" class="counts">
       <div class="container" data-aos="fade-up">
 
@@ -358,14 +358,14 @@
                   </div>
                 </div>
               </div>
-            </div><!-- End .content-->
+            </div> End .content
           </div>
         </div>
 
       </div>
-    </section><!-- End Counts Section -->
+    </section> End Counts Section 
 
-    <!-- ======= Testimonials Section ======= -->
+     ======= Testimonials Section ======= 
     <section id="testimonials" class="testimonials">
       <div class="container" data-aos="zoom-in">
 
@@ -383,7 +383,7 @@
                   <i class="bx bxs-quote-alt-right quote-icon-right"></i>
                 </p>
               </div>
-            </div><!-- End testimonial item -->
+            </div> End testimonial item 
 
             <div class="swiper-slide">
               <div class="testimonial-item">
@@ -396,7 +396,7 @@
                   <i class="bx bxs-quote-alt-right quote-icon-right"></i>
                 </p>
               </div>
-            </div><!-- End testimonial item -->
+            </div> End testimonial item 
 
             <div class="swiper-slide">
               <div class="testimonial-item">
@@ -409,7 +409,7 @@
                   <i class="bx bxs-quote-alt-right quote-icon-right"></i>
                 </p>
               </div>
-            </div><!-- End testimonial item -->
+            </div> End testimonial item 
 
             <div class="swiper-slide">
               <div class="testimonial-item">
@@ -422,7 +422,7 @@
                   <i class="bx bxs-quote-alt-right quote-icon-right"></i>
                 </p>
               </div>
-            </div><!-- End testimonial item -->
+            </div> End testimonial item 
 
             <div class="swiper-slide">
               <div class="testimonial-item">
@@ -435,15 +435,15 @@
                   <i class="bx bxs-quote-alt-right quote-icon-right"></i>
                 </p>
               </div>
-            </div><!-- End testimonial item -->
+            </div> End testimonial item 
           </div>
           <div class="swiper-pagination"></div>
         </div>
 
       </div>
-    </section><!-- End Testimonials Section -->
+    </section> End Testimonials Section 
 
-    <!-- ======= Team Section ======= -->
+     ======= Team Section ======= 
     <section id="team" class="team">
       <div class="container" data-aos="fade-up">
 
@@ -529,9 +529,9 @@
         </div>
 
       </div>
-    </section><!-- End Team Section -->
+    </section> End Team Section 
 
-    <!-- ======= Contact Section ======= -->
+     ======= Contact Section ======= 
     <section id="contact" class="contact">
       <div class="container" data-aos="fade-up">
 
@@ -600,9 +600,9 @@
         </div>
 
       </div>
-    </section><!-- End Contact Section -->
+    </section> End Contact Section 
 
-  </main>
+  </main>-->
 
     
     

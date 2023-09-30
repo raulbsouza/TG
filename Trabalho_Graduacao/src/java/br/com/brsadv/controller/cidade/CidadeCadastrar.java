@@ -32,13 +32,12 @@ public class CidadeCadastrar extends HttpServlet {
             oCidade.setEstado(new Estado(idEstado,"",""));
             
             GenericDAO dao = new CidadeDAO();
-            if (dao.cadastrar(oCidade)){
-                mensagem = "Cidade cadastrado com sucesso!";                
+            if (dao.cadastrar(oCidade)) {
+                response.getWriter().write("1");
             } else {
-                mensagem = "Problemas ao cadastrar Cidade.Verifique os dados informados e tente novamente!";
+                response.getWriter().write("0");
             }
             request.setAttribute("mensagem", mensagem);
-            response.sendRedirect("CidadeListar");
         } catch (Exception ex){
              System.out.println("Problemas no Servlet ao cadastrar Cidade! Erro: " + ex.getMessage());
              ex.printStackTrace();

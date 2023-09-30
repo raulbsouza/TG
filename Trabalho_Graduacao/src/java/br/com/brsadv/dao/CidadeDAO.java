@@ -67,6 +67,7 @@ public class CidadeDAO implements GenericDAO {
             stmt.setInt(2, oCidade.getEstado().getIdEstado());
             stmt.setInt(3, oCidade.getCep());
             stmt.setInt(4, oCidade.getIdCidade());
+            stmt.execute();
             conexao.commit();
             return true;
         } catch (Exception ex) {
@@ -86,7 +87,7 @@ public class CidadeDAO implements GenericDAO {
     public Boolean excluir(int numero) {
         int idCidade = numero;
         PreparedStatement stmt = null;
-         String sql = "delete from estado where idcidade=?";
+         String sql = "delete from cidade where idcidade=?";
         try {
             stmt = conexao.prepareStatement(sql);
             stmt.setInt(1, idCidade);
@@ -137,7 +138,7 @@ public class CidadeDAO implements GenericDAO {
         List<Object> resultado = new ArrayList<>();
         PreparedStatement stmt = null;
         ResultSet rs = null;
-        String sql = "Select*from cidade order by nomecidade";
+        String sql = "Select*from cidade order by idcidade";
         try{
             stmt = conexao.prepareStatement(sql);
             rs=stmt.executeQuery();
