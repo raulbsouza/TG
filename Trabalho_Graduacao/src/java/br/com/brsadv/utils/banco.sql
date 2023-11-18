@@ -30,16 +30,50 @@ create table enderecos (
 );
 insert into enderecos(estado, cidade, rua, numero)values(1,1,'Minas Gerais',1103);
 
-create table advogados(
-	idadv serial primary key,
-	nome varchar(100) not null,
-	area integer references areas(idarea),
+create table pessoa (
+  idpessoa serial primary key,
+  nome varchar(100) not null,
+  cpfcnpj varchar(14) not null unique,
+  datanascimento date,
+  idcidade int,
+  login varchar(20),
+  senha varchar(20),
+  foto text,
+  constraint fk_cidade foreign key (idcidade) references cidade
+);
+
+insert into pessoa (nome, cpfcnpj, datanascimento, idcidade, login, senha, foto)
+      values ('adm','42745947001', '01-01-2020', 1, 'adm','123',null);
+
+create table administrador (
+    idadministrador serial primary key,
+    idpessoa int unique,
+    situacao varchar(1),
+    permitelogin varchar(1),
+    constraint fk_administrador_pessoa foreign key (idpessoa) references pessoa
+);
+
+insert into administrador (idpessoa,situacao,permitelogin)
+      values (1,'A','S');
+
+create table cliente (
+   idcliente serial primary key,
+   idpessoa int unique,
+   situacao varchar(1),
+   permitelogin varchar(1),
+   constraint fk_cliente_pessoa foreign key (idpessoa) references pessoa
+);
+
+ create table adv (
+   idfornecedor serial primary key,
+   idpessoa int unique,
+   area integer references areas(idarea),
 	oab varchar (8) not null,
-	endereco integer references enderecos(idendereco),
 	sobre varchar(200),
 	insta varchar(150),
 	linkedin varchar(150),
-	facebook varchar(150)
+	facebook varchar(150),
+   situacao varchar(1),
+   permitelogin varchar(1),
+   constraint fk_fornecedor_pessoa foreign key (idpessoa) references pessoa
 );
-insert into advogados(nome,area,oab,endereco,sobre,insta,linkedin,facebook)
-values('Raul Bastos',1,'SP999666',1,'Advogado Civil que adora receber PIX !','link 1','link 2', 'link 3');

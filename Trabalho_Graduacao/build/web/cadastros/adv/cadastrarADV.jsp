@@ -62,25 +62,23 @@
 
                                 </div>
 
-                                <!--                                <div class="col-sm">
-                                                                    <label>Valor Pago</label>
-                                                                    <input class="form-control" type="text" style="text-align: rigth;"
-                                                                           name="valorpago" id="valorpago" 
-                                                                           value="<fmt:formatNumber value='${despesa.valorPago}' type='currency'/>"/>
-                                                                </div>-->
 
-                                <!--                                                                <div class="col-sm">
-                                                                                                    <label>Selecionar area principal</label>
-                                                                                                    <select name="area" id="area">
-                                                                                                        <option value="">Selecione</option>
-                                <c:forEach var="endereco" items="${endereco}">
-                                    <option value="${endereco.idendereco}" 
-                                    ${adv.endereco.idendereco == endereco.idendereco ? "selected" : ""}>
-                                    ${endereco.cidade}${endereco.rua}${endereco.numero}
-                                </option>
-                                </c:forEach>
-                            </select>
-                        </div>-->
+
+                                <div class="col-sm">
+                                    <div class="form-group">
+                                        <label>Selecionar Endereço</label>
+                                        <select name="endereco" id="endereco" class="form-control">
+                                            <option value="">Selecione</option>
+                                            <c:forEach var="endereco" items="${endereco}">
+                                                <option value="${endereco.idendereco}" 
+                                                        ${adv.endereco.idendereco == endereco.idendereco ? "selected" : ""}>
+                                                    Rua: ${endereco.rua} Nº: ${endereco.numero} ${endereco.cidade.nomeCidade}-${endereco.estado.siglaEstado}
+                                                </option>
+                                            </c:forEach>
+                                        </select>
+                                    </div>
+                                </div>
+
                                 <div class="col-sm">
                                     <div class="form-group">
                                         <label>Area</label>
@@ -223,7 +221,7 @@
                 timer: 1000
             });
             $("#area").focus();
-        }else {
+        } else {
             gravarDados();
         }
 

@@ -33,18 +33,18 @@ public class AdvExcluir extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=iso-8859-1");
-        int idadv = Integer.parseInt(request.getParameter("idadv"));
+        int idAdv = Integer.parseInt(request.getParameter("idAdv"));
         String mensagem = null;
-        try {
-            GenericDAO dao = new AdvDAO();
-            if (dao.excluir(idadv)) {
+         try {
+            AdvDAO dao = new AdvDAO();
+            if(dao.excluir(idAdv)){
                 response.getWriter().write("1");
-            } else {
+            }else{
                 response.getWriter().write("0");
             }
-        } catch (Exception ex) {
-            System.out.println("Problemas no Servelet ao excluir ADV! Erro: " + ex.getMessage());
-            ex.printStackTrace();
+        } catch (Exception e){
+            System.out.println("Problemas na Servelet Excluir Adv!Erro: " + e.getMessage());
+            e.printStackTrace();
         }
     }
 

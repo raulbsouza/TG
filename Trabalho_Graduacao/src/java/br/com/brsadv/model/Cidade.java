@@ -14,19 +14,16 @@ public class Cidade {
     private int idCidade;
     private String nomeCidade;
     private Estado estado;
-    private Integer cep;
 
     public Cidade(int idCidade, String nomeCidade, Estado estado, Integer cep) {
         this.idCidade = idCidade;
         this.nomeCidade = nomeCidade;
         this.estado = estado;
-        this.cep = cep;
     }
     
     public Cidade(){
         this.idCidade = 0;
         this.nomeCidade ="";
-        this.cep = 0;
         this.estado = new Estado();
     }
 
@@ -54,13 +51,7 @@ public class Cidade {
         this.estado = estado;
     }
 
-    public Integer getCep() {
-        return cep;
-    }
-
-    public void setCep(Integer cep) {
-        this.cep = cep;
-    }
+    
 }
 
     

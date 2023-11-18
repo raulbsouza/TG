@@ -34,12 +34,11 @@ public class CidadeDAO implements GenericDAO {
     public Boolean inserir(Object objeto) {
         Cidade oCidade = (Cidade) objeto;
         PreparedStatement stmt = null;
-        String sql = "insert into cidade(nomecidade,idestado,cep) values (?,?,?)";
+        String sql = "insert into cidade(nomecidade,idestado) values (?,?,?)";
         try {
             stmt = conexao.prepareStatement(sql);
             stmt.setString(1, oCidade.getNomeCidade());
             stmt.setInt(2, oCidade.getEstado().getIdEstado());
-            stmt.setInt(3, oCidade.getCep());
             stmt.execute();
             conexao.commit();
             return true;
@@ -60,12 +59,11 @@ public class CidadeDAO implements GenericDAO {
     public Boolean alterar(Object objeto) {
         Cidade oCidade = (Cidade) objeto;
         PreparedStatement stmt = null;
-        String sql = "update cidade set nomecidade = ?,idestado=?,cep=? where idcidade=?";
+        String sql = "update cidade set nomecidade = ?,idestado=? where idcidade=?";
         try {
             stmt = conexao.prepareStatement(sql);
             stmt.setString(1, oCidade.getNomeCidade());
             stmt.setInt(2, oCidade.getEstado().getIdEstado());
-            stmt.setInt(3, oCidade.getCep());
             stmt.setInt(4, oCidade.getIdCidade());
             stmt.execute();
             conexao.commit();
@@ -121,7 +119,6 @@ public class CidadeDAO implements GenericDAO {
                 oCidade = new Cidade();
                 oCidade.setIdCidade(rs.getInt("idCidade"));
                 oCidade.setNomeCidade(rs.getString("nomecidade"));
-                oCidade.setCep(rs.getInt("cep"));
                 
                 EstadoDAO oEstadoDAO = new EstadoDAO();
                 oCidade.setEstado((Estado) oEstadoDAO.carregar(rs.getInt("idestado")));
@@ -146,7 +143,6 @@ public class CidadeDAO implements GenericDAO {
                 Cidade oCidade = new Cidade();
                 oCidade.setIdCidade(rs.getInt("idCidade"));
                 oCidade.setNomeCidade(rs.getString("nomecidade"));
-                oCidade.setCep(rs.getInt("cep"));
                 
                 EstadoDAO oEstadoDAO = null;
                 try{
@@ -163,5 +159,33 @@ public class CidadeDAO implements GenericDAO {
         }
         return resultado;
     }
-
+public List<Cidade> listar(int idEstado) {
+        List<Cidade> resultado = new ArrayList<>();
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        String sql = "Select * from cidade where idestado = ? order by nomecidade";     
+        try{
+            stmt = conexao.prepareStatement(sql);
+            stmt.setInt(1, idEstado);
+            rs = stmt.executeQuery();
+            while(rs.next()){
+                Cidade oCidade = new Cidade();
+                oCidade.setIdCidade(rs.getInt("idcidade"));
+                oCidade.setNomeCidade(rs.getString("nomecidade"));
+//                oCidade.setCep(rs.getInt("cep"));
+                
+                try{
+                    EstadoDAO oEstadoDAO = new EstadoDAO();
+                    oCidade.setEstado((Estado) oEstadoDAO.carregar(rs.getInt("idestado")));
+                }catch(Exception ex){
+                    System.out.println("Erro ao carregar estado"+ex.getMessage());
+                    ex.printStackTrace();
+                }
+                resultado.add(oCidade);
+            }
+        }catch(SQLException ex){
+            System.out.println("Problemas ao listar Cidade! Erro: "+ex.getMessage());
+        } 
+        return resultado;
+    }
 }

@@ -67,10 +67,22 @@
                         <li><a class="nav-link scrollto" href="#contact">Contato</a></li>
                         <li class="dropdown"><a href="#"><span>ADM</span> <i class="bi bi-chevron-down"></i></a>
                             <ul>
-                                <li class="dropdown"><a href="#"><span>ADV's</span> <i class="bi bi-chevron-down"></i></a>
+                                <li class="dropdown"><a href="#"><span>123</span> <i class="bi bi-chevron-down"></i></a>
                                     <ul>
                                         <li><a href="${pageContext.request.contextPath}/AdvListar">Listar Advogados</a></li>
                                         <li><a href="${pageContext.request.contextPath}/AdvNovo">Cadastrar Advogado</a></li>
+                                    </ul>
+                                <li class="dropdown"><a href="#"><span>Adm's</span> <i class="bi bi-chevron-down"></i></a>
+                                    <ul>
+                                        <li><a href="${pageContext.request.contextPath}/AdministradorListar">Listar Adm's</a></li>
+                                    </ul>
+                                <li class="dropdown"><a href="#"><span>Adv's</span> <i class="bi bi-chevron-down"></i></a>
+                                    <ul>
+                                        <li><a href="${pageContext.request.contextPath}/AdvListar">Listar Adv's</a></li>
+                                    </ul>
+                                <li class="dropdown"><a href="#"><span>Clientes</span> <i class="bi bi-chevron-down"></i></a>
+                                    <ul>
+                                        <li><a href="${pageContext.request.contextPath}/ClienteListar">Listar Clientes</a></li>
                                     </ul>
                                 <li class="dropdown"><a href="#"><span>Estados</span> <i class="bi bi-chevron-down"></i></a>
                                     <ul>

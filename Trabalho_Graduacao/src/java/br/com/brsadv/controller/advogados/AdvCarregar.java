@@ -6,6 +6,10 @@ package br.com.brsadv.controller.advogados;
 
 import br.com.brsadv.dao.AdvDAO;
 import br.com.brsadv.dao.AreaDAO;
+import br.com.brsadv.dao.EnderecoDAO;
+import br.com.brsadv.model.Adv;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -21,19 +25,20 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet(name = "AdvCarregar", urlPatterns = {"/AdvCarregar"})
 public class AdvCarregar extends HttpServlet {
 
-    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=iso-8859-1");
-        try {
-            int idadv = Integer.parseInt(request.getParameter("idadv"));
-            AdvDAO oAdvDAO = new AdvDAO();
-            request.setAttribute("adv", oAdvDAO.carregar(idadv));
-            AreaDAO oAreaDAO = new AreaDAO();
-            request.setAttribute("area", oAreaDAO.listar());
-            request.getRequestDispatcher("/cadastros/adv/cadastrarADV.jsp").forward(request, response);
-        } catch (Exception ex){
-            System.out.println("Erro carregar cidade "+ex.getMessage());
+        try{
+            int idAdv = Integer.parseInt(request.getParameter("idAdv"));
+            AdvDAO dao = new AdvDAO();
+            Adv oAdv = (Adv) dao.carregar(idAdv);
+            
+            Gson ogson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
+            String jSon = ogson.toJson(oAdv);
+            response.getWriter().write(jSon);
+            
+        }catch(Exception ex){
+            System.out.println("Erro ao buscar Adv- "+ex.getMessage());
             ex.printStackTrace();
         }
     }

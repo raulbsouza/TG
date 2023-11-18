@@ -12,6 +12,7 @@ import br.com.brsadv.model.Endereco;
 import br.com.brsadv.model.Estado;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Date;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -37,32 +38,48 @@ public class AdvCadastrar extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=iso-8859-1");
-        int area = Integer.parseInt(request.getParameter("area"));
-        String mesagem = null;
-        try {
-            Adv oAdv = new Adv();
-            oAdv.setIdadv(Integer.parseInt(request.getParameter("idadv")));
-            oAdv.setSobre(request.getParameter("sobre"));
-            oAdv.setOab(request.getParameter("oab"));
-            oAdv.setNome(request.getParameter("nome"));
-            oAdv.setInsta(request.getParameter("insta"));
-            oAdv.setLinkedin(request.getParameter("linkedin"));
-            oAdv.setFacebook(request.getParameter("facebook"));
-            oAdv.setImagemadv(request.getParameter("imagemadv"));
-
-//            oAdv.setEndereco(new Endereco(endereco,(new Estado(0,"","")),(new Cidade(0,"",(new Estado(0,"","")),0)),"",0));
-
-            oAdv.setArea(new Area(area, "", ""));
-
+       try{           
+            //busca parametros do formulario (ajax) - view
+            int idPessoa = Integer.parseInt(request.getParameter("idpessoa"));
+            int idAdv = Integer.parseInt(request.getParameter("idadv"));
+            String cpfCnpjPessoa = request.getParameter("cpfcnpjpessoa");
+            String nomePessoa = request.getParameter("nomepessoa");
+            Date dataNascimento = Date.valueOf(request.getParameter("datanascimento"));
+            int idCidade = Integer.parseInt(request.getParameter("idcidade"));
+            String login = request.getParameter("login");
+            String senha = request.getParameter("senha");
+            String permitelogin = request.getParameter("permitelogin");
+            String situacao = request.getParameter("situacao");
+            int idArea = Integer.parseInt(request.getParameter("area"));
+            String fotoPessoa = request.getParameter("fotopessoa");
+            String oab = request.getParameter("oab");
+            String sobre = request.getParameter("sobre");
+            String insta = request.getParameter("insta");
+            String linkedin = request.getParameter("linkedin");
+            String facebook = request.getParameter("facebook");
+            
+            //cria objeto de cidade.
+            Cidade oCidade = new Cidade();
+            oCidade.setIdCidade(idCidade);
+            Area oArea = new Area();
+            oArea.setIdarea(idArea);
+            
+            //gera objeto de administrador
+            Adv oAdv = new Adv(idAdv, permitelogin, situacao, oArea, oab,sobre, insta, linkedin, facebook,
+                    idPessoa, cpfCnpjPessoa, nomePessoa, dataNascimento, oCidade, login, senha, 
+                    fotoPessoa);
+            //instancia camada dao de administrador    
             AdvDAO dao = new AdvDAO();
 
-            if (dao.cadastrar(oAdv)) {
+            if(dao.cadastrar(oAdv)){
+                //mensagem = "Cadastrado com Sucesso!";
                 response.getWriter().write("1");
-            } else {
+            }else{
+                //mensagem = "Problemas ao cadastrar Despesa!";
                 response.getWriter().write("0");
             }
         } catch (Exception e) {
-            System.out.println("Problemas no servlet ao Cadastrar Advogado! Erro: " + e.getMessage());
+            System.out.println("Problemas no servelet Cadastrar Adv!Erro: " + e.getMessage());
             e.printStackTrace();
         }
     }

@@ -6,6 +6,8 @@
 package br.com.brsadv.controller.advogados;
 
 import br.com.brsadv.dao.AdvDAO;
+import br.com.brsadv.dao.AreaDAO;
+import br.com.brsadv.dao.EstadoDAO;
 import br.com.brsadv.dao.GenericDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -34,13 +36,18 @@ public class AdvListar extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=iso-8859-1");
-        try {
+        try{
             GenericDAO dao = new AdvDAO();
-            request.setAttribute("adv", dao.listar());
-            request.getRequestDispatcher("/cadastros/adv/advs_adm.jsp").forward(request, response);
-        } catch (Exception ex) {
-            System.out.println("Problemas no Servlet ao Listar" + " Advgados! Erro: " + ex.getMessage());
-            ex.printStackTrace();
+            request.setAttribute("advs",dao.listar());
+            GenericDAO oEstadoDAO = new EstadoDAO();
+            request.setAttribute("estados", oEstadoDAO.listar());
+            GenericDAO oAreaDAO = new AreaDAO();
+            request.setAttribute("areas", oAreaDAO.listar());
+            request.getRequestDispatcher("/cadastros/adv/adv.jsp")
+                        .forward(request, response);
+        } catch (Exception ex){
+            System.out.println("Problemas no Servlet ao Listar"
+                    + "ADV! Erro: " + ex.getMessage());
         }
     }
 

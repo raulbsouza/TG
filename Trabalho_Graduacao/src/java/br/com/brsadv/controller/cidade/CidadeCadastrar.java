@@ -20,7 +20,6 @@ public class CidadeCadastrar extends HttpServlet {
         int idCidade = Integer.parseInt(request.getParameter("idcidade"));
         int idEstado = Integer.parseInt(request.getParameter("idestado"));
         String nomeCidade = request.getParameter("nomecidade");
-        Integer cep = Integer.parseInt(request.getParameter("cep"));
         String mensagem = null;
 
         try{
@@ -28,7 +27,6 @@ public class CidadeCadastrar extends HttpServlet {
             Cidade oCidade = new Cidade();
             oCidade.setIdCidade(idCidade);
             oCidade.setNomeCidade(nomeCidade);
-            oCidade.setCep(cep);
             oCidade.setEstado(new Estado(idEstado,"",""));
             
             GenericDAO dao = new CidadeDAO();

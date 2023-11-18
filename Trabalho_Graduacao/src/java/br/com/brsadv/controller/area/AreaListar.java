@@ -20,7 +20,7 @@ public class AreaListar extends HttpServlet {
         try{
         
             GenericDAO dao = new AreaDAO();
-            request.setAttribute("area", dao.listar());
+            request.setAttribute("areas", dao.listar());
             request.getRequestDispatcher("/cadastros/areas/areas.jsp").forward(request, response);
         
         }catch (Exception ex){

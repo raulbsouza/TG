@@ -1,59 +1,62 @@
+
 package br.com.brsadv.model;
 
-public class Adv {
+import br.com.brsadv.utils.Conversao;
+import java.text.ParseException;
+import java.util.Date;
 
-    private int idadv;
-    private String nome;
+public class Adv extends Pessoa{
+    private int idAdv;
+    private String permiteLogin;
+    private String situacao;
     private Area area;
     private String oab;
-    private Endereco endereco;
     private String sobre;
     private String insta;
     private String linkedin;
     private String facebook;
-    private String imagemadv;
 
-    public Adv(int idadv, String nome, Area area, String oab, Endereco endereco, String sobre, String insta, String linkedin, String facebook, String imagemadv) {
-        this.idadv = idadv;
-        this.nome = nome;
+   public Adv(int idAdv, String permiteLogin, String situacao, Area area, String oab, String sobre, String insta, String linkedin, String facebook, int idPessoa, String cpfCnpj, String nome, Date dataNascimento, Cidade cidade, String login, String senha, String foto) {
+        super(idPessoa, cpfCnpj, nome, dataNascimento, cidade, login, senha, foto);
+        this.idAdv = idAdv;
+        this.permiteLogin = permiteLogin;
+        this.situacao = situacao;
         this.area = area;
         this.oab = oab;
-        this.endereco = endereco;
         this.sobre = sobre;
         this.insta = insta;
         this.linkedin = linkedin;
         this.facebook = facebook;
-        this.imagemadv = imagemadv;
+    }
+   public static Adv advogadoVazio() throws ParseException {
+        Cidade oCidade = new Cidade();
+        Date dataNascimento = Conversao.dataAtual();
+        Adv oAdvogados = new Adv(0, "S", "A", new Area(), "", "", "", "", "", 0, "", "", dataNascimento, oCidade, "", "", null);
+        return oAdvogados;
     }
 
-    
-    
-    public Adv() {
-        this.idadv = 0;
-        this.nome = "";
-        this.area = new Area();
-        this.oab = "";
-        this.endereco = new Endereco();
-        this.sobre = "";
-        this.insta = "";
-        this.linkedin = "";
-        this.facebook = "";
+    public int getIdAdv() {
+        return idAdv;
     }
 
-    public int getIdadv() {
-        return idadv;
+    public void setIdAdv(int idAdv) {
+        this.idAdv = idAdv;
     }
 
-    public void setIdadv(int idadv) {
-        this.idadv = idadv;
+    public String getPermiteLogin() {
+        return permiteLogin;
     }
 
-    public String getNome() {
-        return nome;
+    public void setPermiteLogin(String permiteLogin) {
+        this.permiteLogin = permiteLogin;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    public String getSituacao() {
+        return situacao;
+    }
+
+    public void setSituacao(String situacao) {
+        this.situacao = situacao;
     }
 
     public Area getArea() {
@@ -72,28 +75,12 @@ public class Adv {
         this.oab = oab;
     }
 
-    public Endereco getEndereco() {
-        return endereco;
-    }
-
-    public void setEndereco(Endereco endereco) {
-        this.endereco = endereco;
-    }
-
     public String getSobre() {
         return sobre;
     }
 
     public void setSobre(String sobre) {
         this.sobre = sobre;
-    }
-
-    public String getImagemadv() {
-        return imagemadv;
-    }
-
-    public void setImagemadv(String imagemadv) {
-        this.imagemadv = imagemadv;
     }
 
     public String getInsta() {
@@ -119,5 +106,7 @@ public class Adv {
     public void setFacebook(String facebook) {
         this.facebook = facebook;
     }
+
+ 
 
 }

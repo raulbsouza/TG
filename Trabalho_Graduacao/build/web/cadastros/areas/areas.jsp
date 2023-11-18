@@ -4,7 +4,7 @@
 <jsp:include page="/header.jsp"/>
 <div class="tabelas">
     <div class="card_table">
-        <h2>Areas</h2>
+        <h2>Áreas</h2>
         <div class="tabela-listar">
             <table class="largura100">
                 <thead >                        
